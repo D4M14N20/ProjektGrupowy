@@ -4,11 +4,11 @@ import time
 import json
 
 def run_example(build = True, compile = True):
-    exmp_path = r"./docker-images/example"
+    exmp_path = r".\docker-images\example"
     # comp_path = r"./docker-images/compilers/python-compiler"
-    comp_path = r"./docker-images/compilers/cpp-compiler"
+    comp_path = r".\docker-images\compilers\cpp-compiler"
     # comp_path = r"./docker-images/compilers/rust-compiler"
-    exec_path = r"./docker-images/exec-python"
+    exec_path = r".\docker-images\exec-python"
     # exec_path = r"./docker-images/exec-legacy"
 
     exec_in = exmp_path+"/exec-in"
@@ -41,7 +41,7 @@ def run_example(build = True, compile = True):
     # exit(1)
     if build:
         subprocess.run(["docker", "build", "--build-arg", "LOGS=off", "-t", "exec", exec_path], check=True)
-        subprocess.run(["docker", "build", "-t", "comp", comp_path], check=True)
+        subprocess.run(["docker", "build","--no-cache", "-t", "comp", comp_path], check=True)
 
     if compile:
         start_time = time.time()
